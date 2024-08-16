@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://crlgvn56em5pu"]
+
+[ext_resource type="Script" path="res://control_shader_params.gd" id="1_deyla"]
+[ext_resource type="Shader" path="res://test.gdshader" id="1_eqnsj"]
+[ext_resource type="Texture2D" uid="uid://dbinuus5cb25j" path="res://art/white.png" id="2_3sb4f"]
+[ext_resource type="Texture2D" uid="uid://5dtgrw3k0fm0" path="res://icon.svg" id="2_akyr6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jq4vv"]
+shader = ExtResource("1_eqnsj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4fsbu"]
+shader = ExtResource("1_eqnsj")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 10
+script = ExtResource("1_deyla")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_jq4vv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3sb4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_4fsbu")
+texture = ExtResource("2_akyr6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color(1, 0, 1, 1)
+top_level = true
+layout_mode = 0
+offset_top = 1.0
+offset_right = 120.0
+offset_bottom = 24.0
+scale = Vector2(0.99545, 0.974596)
+text = "term1 - x,y:"
+fit_content = true
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 24.0
+offset_right = 90.0625
+offset_bottom = 55.0
+
+[node name="SpinBox2" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 55.0
+offset_right = 90.0625
+offset_bottom = 86.0
+scale = Vector2(1, 0.997206)
+
+[connection signal="ready" from="SpinBox" to="." method="_on_spin_box_ready"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="value_changed" from="SpinBox2" to="." method="_on_spin_box_2_value_changed"]
