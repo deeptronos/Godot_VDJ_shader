@@ -56,22 +56,3 @@ offset_bottom = 24.0
 scale = Vector2(0.99545, 0.974596)
 text = "term1 - x,y:"
 fit_content = true
-
-[node name="SpinBox" type="SpinBox" parent="."]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 24.0
-offset_right = 90.0625
-offset_bottom = 55.0
-
-[node name="SpinBox2" type="SpinBox" parent="."]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 55.0
-offset_right = 90.0625
-offset_bottom = 86.0
-scale = Vector2(1, 0.997206)
-
-[connection signal="ready" from="SpinBox" to="." method="_on_spin_box_ready"]
-[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
-[connection signal="value_changed" from="SpinBox2" to="." method="_on_spin_box_2_value_changed"]
