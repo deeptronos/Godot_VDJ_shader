@@ -11,10 +11,13 @@ const ANIMATION_SPEED = 0.1
 var spectrum
 var min_values = []
 var max_values = []
+var mag = 0.
+var tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	test_tween();
+	#test_tween();
+	tween = get_tree().create_tween();
 	spectrum = AudioServer.get_bus_effect_instance(0,0)
 	min_values.resize(VU_COUNT)
 	min_values.fill(0.0)
@@ -28,6 +31,15 @@ func _process(delta):
 	var data = []
 	var prev_hz = 0
 	
+	var mag = spectrum.get_magnitude_for_frequency_range(200., 600.).length()
+	var engy = clampf((MIN_DB + linear_to_db(mag)) / MIN_DB, 0 ,1)
+	var hgt = engy * HEIGHT * HEIGHT_SCALE
+	var mng = remap(hgt, MIN_DB, HEIGHT*HEIGHT_SCALE, 0., 1.)
+	#tween.tween_method(set_shader_value, 0., mng, delta);
+
+	$TextureRect.material.set_shader_parameter("arb2", mng);
+
+
 	for i in range(1, VU_COUNT + 1):
 		var hz = i * FREQ_MAX / VU_COUNT;
 		var magnitude = spectrum.get_magnitude_for_frequency_range(prev_hz, hz).length()
@@ -44,9 +56,13 @@ func _process(delta):
 
 		if data[i] <= 0.0:
 			min_values[i] = lerp(min_values[i], 0.0, ANIMATION_SPEED)
-		
-	print(data)
-	print("-----")
+	
+	var rmp = remap(data[VU_COUNT/2], MIN_DB, HEIGHT* HEIGHT_SCALE, 0, 3.5)
+	#var mng = remap(hgt, MIN_DB, HEIGHT*HEIGHT_SCALE, 0., 1.)
+	$TextureRect.material.set_shader_parameter("arb", rmp);
+	
+	
+
 
 
 func test_tween():
