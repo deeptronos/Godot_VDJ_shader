@@ -30,14 +30,14 @@ func _ready():
 func _process(delta):
 	var data = []
 	var prev_hz = 0
-	
-	var mag = spectrum.get_magnitude_for_frequency_range(200., 600.).length()
-	var engy = clampf((MIN_DB + linear_to_db(mag)) / MIN_DB, 0 ,1)
-	var hgt = engy * HEIGHT * HEIGHT_SCALE
-	var mng = remap(hgt, MIN_DB, HEIGHT*HEIGHT_SCALE, 0., 1.)
+	#
+	#var mag = spectrum.get_magnitude_for_frequency_range(200., 600.).length()
+	#var engy = clampf((MIN_DB + linear_to_db(mag)) / MIN_DB, 0 ,1)
+	#var hgt = engy * HEIGHT * HEIGHT_SCALE
+	#var mng = remap(hgt, MIN_DB, HEIGHT*HEIGHT_SCALE, 0., 1.)
 	#tween.tween_method(set_shader_value, 0., mng, delta);
 
-	$TextureRect.material.set_shader_parameter("arb2", mng);
+	#$TextureRect.material.set_shader_parameter("arb2", mng);
 
 
 	for i in range(1, VU_COUNT + 1):
@@ -57,9 +57,12 @@ func _process(delta):
 		if data[i] <= 0.0:
 			min_values[i] = lerp(min_values[i], 0.0, ANIMATION_SPEED)
 	
-	var rmp = remap(data[VU_COUNT/2], MIN_DB, HEIGHT* HEIGHT_SCALE, 0, 3.5)
+	var rmp1 = lerp(min_values[VU_COUNT/2], max_values[VU_COUNT/2], ANIMATION_SPEED)
+	#var rmp1 = remap(max_values[VU_COUNT/2], min_values[VU_COUNT/2], max_values[VU_COUNT/2], 0., 3.5)
+	var rmp2 = remap(max_values[VU_COUNT/2], MIN_DB, HEIGHT* HEIGHT_SCALE, 0., 3.5)
 	#var mng = remap(hgt, MIN_DB, HEIGHT*HEIGHT_SCALE, 0., 1.)
-	$TextureRect.material.set_shader_parameter("arb", rmp);
+	$TextureRect.material.set_shader_parameter("arb", rmp1);
+	$TextureRect.material.set_shader_parameter("arb2", rmp2);
 	
 	
 
