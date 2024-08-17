@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://crlgvn56em5pu"]
+[gd_scene load_steps=8 format=3 uid="uid://crlgvn56em5pu"]
 
 [ext_resource type="Script" path="res://control_shader_params.gd" id="1_deyla"]
 [ext_resource type="Shader" path="res://test.gdshader" id="1_eqnsj"]
 [ext_resource type="Texture2D" uid="uid://dbinuus5cb25j" path="res://art/white.png" id="2_3sb4f"]
 [ext_resource type="Texture2D" uid="uid://5dtgrw3k0fm0" path="res://icon.svg" id="2_akyr6"]
+[ext_resource type="AudioStream" uid="uid://betkl342mof3w" path="res://music/Sfire3-JohnTalabot.mp3" id="5_cu0mu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jq4vv"]
 resource_local_to_scene = true
@@ -56,3 +57,7 @@ offset_bottom = 24.0
 scale = Vector2(0.99545, 0.974596)
 text = "term1 - x,y:"
 fit_content = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_cu0mu")
+autoplay = true

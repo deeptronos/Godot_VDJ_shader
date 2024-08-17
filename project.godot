@@ -15,6 +15,10 @@ run/main_scene="res://guanabarashader.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/enable_input=true
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
