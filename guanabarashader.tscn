@@ -8,11 +8,13 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jq4vv"]
 resource_local_to_scene = true
 shader = ExtResource("1_eqnsj")
-shader_parameter/arb = 0.0
+shader_parameter/arb = 3.5
+shader_parameter/arb2 = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4fsbu"]
 shader = ExtResource("1_eqnsj")
 shader_parameter/arb = 1.0
+shader_parameter/arb2 = 1.0
 
 [node name="Control" type="Control"]
 layout_mode = 3

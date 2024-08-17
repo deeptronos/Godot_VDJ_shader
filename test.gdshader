@@ -15,33 +15,34 @@ void vertex() {
 
 //const float demotime = 1.4;
 
-uniform float arb : hint_range(0, 1) = 0.5;
+uniform float arb : hint_range(0, 3.5) = 0.5;
+uniform float arb2 : hint_range(0.,1.) = 1.;
 
 void fragment(){
 	//float demotime = TIME;
 	float demotime = arb;
 	vec2 r = 1./SCREEN_PIXEL_SIZE;
-	r = r * term1;
+	//r = r * term1;
 	vec3 c;
 	//float l,z = TIME;
+
 	float l, z = demotime;
-	demotime = smoothstep(0.0, 2.0, demotime)  * 2.;
-	demotime = min(demotime, 2.);
+	
 	for (int i=0; i<3; i++){
 		vec2 uv,p = FRAGCOORD.xy/r;
 		uv = p;
 		p -= 0.5;
 		p.x *= r.x/r.y;
 		z += 0.07;
-		l = length(p);
-		uv += (p*.1)/l*(sin(z)+1.)*abs(sin(l*10.-z-z));
+		l = length(p) / arb2;
+		uv += ((p*1.)/l *(sin((z))+1.) * abs(sin(l*10.-z-z)));
 		//uv += p/l * tan(l + TIME) * 2.;
-		c[i] = 0.01 / length(mod(uv, 1.)-.5);
+		c[i] = clamp( 0.01 / length(mod(uv, 1.)-.5), 0.0, 1) * arb2;
 		//c[i] /= tan(TIME + float(i) * 0.1) * 1.;
 		//c[i] /= tan(demotime + float(i) * 0.1) * 0.01;
 	}
   //COLOR = vec4(r, 0.5, 1.0);
-	COLOR = vec4(c/l, TIME);
+	COLOR = vec4(c/(l)*1., TIME);
 }
 
 //void light() {
